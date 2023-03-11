@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { UserDispatchContext } from "../contexts/userContext";
 
-interface Props {
-  setUser: any;
-}
-
-const Logout: React.FC<Props> = ({ setUser }) => {
+const Logout: React.FC<any> = () => {
+  const userDispatch = useContext(UserDispatchContext);
   const logoutUser = async () => {
     localStorage.removeItem("token");
-    setUser({});
+    userDispatch({ type: "logout" });
   };
 
   useEffect(() => {

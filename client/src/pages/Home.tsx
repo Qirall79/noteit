@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import fetchProjects from "../utils/fetchProjects";
 import fetchNotes from "../utils/fetchNotes";
 import Sidebar from "../components/Sidebar";
 import Notes from "../components/Notes";
+import { UserContext } from "../contexts/userContext";
 
 interface IUser {
   id: string;
@@ -12,28 +13,25 @@ interface IUser {
   email: string;
 }
 
-interface Props {
-  user: IUser;
-}
+const Home: React.FC<any> = (): any => {
+  // get user from context
+  const user = useContext(UserContext);
 
-const Home: React.FC<Props> = ({ user }): any => {
+  // component state
   const [projects, setProjects] = useState([]);
   const [selected, setSelected] = useState("all");
   const [notes, setNotes] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
-  const getProjects = async () => {
+  // get user projects and notes
+  const getData = async () => {
     await fetchProjects(user.id, setProjects);
-    setLoaded(true);
-  };
-  const getNotes = async () => {
     await fetchNotes(user.id, setNotes);
     setLoaded(true);
   };
 
   useEffect(() => {
-    getProjects();
-    getNotes();
+    getData();
   }, []);
 
   if (!loaded) {

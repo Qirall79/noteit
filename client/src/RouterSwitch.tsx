@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { UserContext } from "./contexts/userContext";
+import { useContext } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,10 +16,10 @@ interface IUser {
 interface Props {
   user: IUser;
   getUser: any;
-  setUser: any;
 }
 
-const RouterSwitch = ({ user, setUser, getUser }: Props) => {
+const RouterSwitch = ({ getUser }: Props) => {
+  const user = useContext(UserContext);
   return (
     <BrowserRouter>
       <div className="w-full h-full">
@@ -25,9 +27,7 @@ const RouterSwitch = ({ user, setUser, getUser }: Props) => {
         <Routes>
           <Route
             path="/"
-            element={
-              user.id ? <Home user={user} /> : <Navigate to={"/login"} />
-            }
+            element={user.id ? <Home /> : <Navigate to={"/login"} />}
           />
           <Route
             path="/login"
@@ -43,13 +43,7 @@ const RouterSwitch = ({ user, setUser, getUser }: Props) => {
           />
           <Route
             path="/logout"
-            element={
-              user.id ? (
-                <Logout setUser={setUser} />
-              ) : (
-                <Navigate to={"/login"} />
-              )
-            }
+            element={user.id ? <Logout /> : <Navigate to={"/login"} />}
           />
         </Routes>
       </div>

@@ -6,7 +6,7 @@ interface IUser {
   email: string;
 }
 
-const fetchUser = async (setUser: any, setLoaded: any) => {
+const fetchUser = async (userDispatch: any, setLoaded: any) => {
   try {
     const url = "http://localhost:5000/auth/user";
     const token = localStorage.getItem("token");
@@ -23,7 +23,11 @@ const fetchUser = async (setUser: any, setLoaded: any) => {
       },
     });
     const user: IUser = response.data.user.user;
-    setUser(user);
+
+    userDispatch({
+      type: "login",
+      user,
+    });
     setLoaded(true);
     return;
   } catch (err) {
