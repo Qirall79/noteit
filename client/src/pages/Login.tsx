@@ -1,41 +1,37 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import loginUser from "../utils/loginUser";
+import { useForm } from "react-hook-form";
 
 interface Props {
   getUser: any;
 }
 
+type formData = {
+  username: string;
+  password: string;
+};
+
 const Login = ({ getUser }: Props) => {
-  const [loaded, setLoaded] = useState(true);
+  const [response, setResponse] = useState({ message: "" });
   const [redirect, setRedirect] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formData>();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const username: string | null = (
-      document.querySelector("#username") as HTMLInputElement
-    ).value;
-    const password: string | null = (
-      document.querySelector("#password") as HTMLInputElement
-    ).value;
-
-    setLoaded(false);
-    await loginUser({ username, password }, setRedirect, getUser);
-    setLoaded(true);
+  const handleClick = async (data: formData) => {
+    const res = await loginUser(data, setRedirect, getUser);
+    if (res) {
+      setResponse(res);
+    }
   };
 
   if (redirect) {
     return (
       <div>
         <Navigate to={"/"} />
-      </div>
-    );
-  }
-
-  if (!loaded) {
-    return (
-      <div>
-        <h2>Loading...</h2>
       </div>
     );
   }
@@ -51,30 +47,45 @@ const Login = ({ getUser }: Props) => {
             Username
           </label>
           <input
+            {...register("username", {
+              required: "Username is required",
+            })}
             type="text"
             name="username"
             id="username"
-            className="h-8 rounded-sm outline-none pl-2 text-sm text-white bg-[#0e2219]"
+            className="h-8 rounded-sm outline-none pl-2 text-sm text-white bg-[#0e2219] mb-1"
           />
+          <p className="text-sm font-medium text-[#ccff33]">
+            {errors?.username?.message}
+          </p>
         </div>
         <div className="w-full max-w-[500px] form-group flex flex-col gap-1">
           <label className="font-medium" htmlFor="password">
             Password
           </label>
           <input
+            {...register("password", {
+              required: "Password is required",
+            })}
             type="password"
             name="password"
             id="password"
-            className="h-8 rounded-sm outline-none pl-2 text-sm text-white bg-[#0e2219]"
+            className="h-8 rounded-sm outline-none pl-2 text-sm text-white bg-[#0e2219] mb-1"
           />
+          <p className="text-sm font-medium text-[#ccff33]">
+            {errors?.password?.message}
+          </p>
         </div>
         <input
           type="submit"
           className="bg-[#0e2219] font-medium text-sm text-white px-7 py-2 rounded-md cursor-pointer"
           value="Login"
-          onClick={handleSubmit}
+          onClick={handleSubmit(handleClick)}
         />
       </form>
+      <p className="text-sm font-medium mt-3 text-[#ccff33]">
+        {response?.message}
+      </p>
     </div>
   );
 };

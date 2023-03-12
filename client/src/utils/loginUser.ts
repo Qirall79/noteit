@@ -20,9 +20,8 @@ const loginUser = async (data: IData, setRedirect: any, getUser: any) => {
     setRedirect(true);
 
     return;
-  } catch (err) {
-    console.log(err);
-    return;
+  } catch (err: any) {
+    return err.response.data;
   }
 };
 
