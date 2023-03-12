@@ -7,14 +7,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Signup from "./pages/Signup";
 
-interface IUser {
-  id: string;
-  username: string;
-  email: string;
-}
-
 interface Props {
-  user: IUser;
   getUser: any;
 }
 

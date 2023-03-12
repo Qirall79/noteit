@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer } from "react";
 import RouterSwitch from "./RouterSwitch";
 import fetchUser from "./utils/fetchUser";
 import { UserContext, UserDispatchContext } from "./contexts/userContext";
-
-// user reducer
 import userReducer from "./reducers/userReducer";
 
 function App() {
@@ -33,11 +31,11 @@ function App() {
 
   return (
     <div className="min-w-screen min-h-screen">
-      <UserContext.Provider value={user}>
-        <UserDispatchContext.Provider value={userDispatch}>
-          <RouterSwitch user={user} getUser={getUser} />
-        </UserDispatchContext.Provider>
-      </UserContext.Provider>
+      <UserDispatchContext.Provider value={userDispatch}>
+        <UserContext.Provider value={user}>
+          <RouterSwitch getUser={getUser} />
+        </UserContext.Provider>
+      </UserDispatchContext.Provider>
     </div>
   );
 }
