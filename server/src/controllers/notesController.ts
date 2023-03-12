@@ -8,6 +8,7 @@ import { ObjectId } from "mongoose";
 // Note interface
 interface INote {
   text: string;
+  title: string;
   project: string | ObjectId;
   author: string | ObjectId;
 }
@@ -33,6 +34,7 @@ const notes_get = async (
 
 const note_create = [
   body("text").isLength({ min: 1 }).withMessage("note body must be supplied"),
+  body("title").isLength({ min: 1 }).withMessage("note title must be supplied"),
   body("author").isLength({ min: 1 }).withMessage("author id must be supplied"),
   body("project")
     .isLength({ min: 1 })
@@ -40,9 +42,10 @@ const note_create = [
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const errors: any = validationResult(req);
-      const { text, author, project }: INote = req.body;
+      const { text, author, project, title }: INote = req.body;
       const note = new Note({
         text,
+        title,
         author,
         project,
       });
@@ -88,6 +91,7 @@ const note_create = [
 
 const note_update = [
   body("text").isLength({ min: 1 }).withMessage("note body must be supplied"),
+  body("title").isLength({ min: 1 }).withMessage("note title must be supplied"),
   body("author").isLength({ min: 1 }).withMessage("author id must be supplied"),
   body("project")
     .isLength({ min: 1 })
@@ -97,6 +101,7 @@ const note_update = [
       const errors: any = validationResult(req);
       const id: string = req.params.id;
       const text: string = req.body.text;
+      const title: string = req.body.title;
 
       // check for validation errors
       if (!errors.isEmpty()) {
@@ -109,6 +114,7 @@ const note_update = [
       // update note
       await Note.findByIdAndUpdate(id, {
         text,
+        title,
       });
       res.status(200).json({
         message: "note updated successfully.",
