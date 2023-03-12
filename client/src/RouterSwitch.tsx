@@ -16,7 +16,7 @@ const RouterSwitch = ({ getUser }: Props) => {
   return (
     <BrowserRouter>
       <div className="w-full h-full">
-        <Navbar isAuthenticated={Boolean(user.id)} />
+        <Navbar />
         <Routes>
           <Route
             path="/"
