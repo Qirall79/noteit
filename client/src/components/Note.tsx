@@ -13,8 +13,8 @@ const Note: React.FC<Props> = ({ note }): any => {
           {note.title ? note.title : "title"}
         </h3>
         <div className="flex gap-4 text-sm">
-          <AiTwotoneEdit className="text-lg text-[#40916c] cursor-pointer" />
-          <AiFillDelete className="text-lg text-[#40916c] cursor-pointer" />
+          <AiTwotoneEdit className="text-lg text-[#40916c] hover:text-[#1B4332] cursor-pointer transition-all" />
+          <AiFillDelete className="text-lg text-[#40916c] hover:text-[#1B4332] cursor-pointer transition-all" />
         </div>
       </div>
       <div id="content" className="text-sm">

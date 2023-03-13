@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Note from "./Note";
+import NoteForm from "./NoteForm";
 
 interface Props {
   project: any;
@@ -25,11 +26,10 @@ const Notes: React.FC<Props> = ({ project, notes }): any => {
 
   return (
     <div className=" py-20 px-10 bg-[#1b4332] text-white grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-10 justify-items-center">
-      {!selectedNotes.length
-        ? "There are no notes for this project."
-        : selectedNotes.map((note: any): any => {
-            return <Note key={note._id} note={note} />;
-          })}
+      {project === "all" ? "" : <NoteForm />}
+      {selectedNotes.map((note: any): any => {
+        return <Note key={note._id} note={note} />;
+      })}
     </div>
   );
 };
