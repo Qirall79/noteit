@@ -1,22 +1,55 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import addNote from "../utils/addNote";
+import { UserContext } from "../contexts/userContext";
+import { NotesDispatchContext } from "../contexts/notesContext";
 
 type FormData = {
   text: string;
   title: string;
+  author: string;
+  project: string;
 };
 
-const NoteForm: React.FC<any> = () => {
+interface Props {
+  project: any;
+  selectedNotes: any;
+  setSelectedNotes: any;
+}
+
+const NoteForm: React.FC<Props> = ({
+  project,
+  selectedNotes,
+  setSelectedNotes,
+}) => {
+  // get user context
+  const user = useContext(UserContext);
+
+  const notesDispatch = useContext(NotesDispatchContext);
+
+  // display/hide form
   const [editMode, setEditMode] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const handleClick = (data: FormData) => {
-    console.log(data);
+  const handleClick = async (data: FormData) => {
+    data.author = user.id;
+    data.project = project;
+
+    setEditMode(false);
+
+    // update UI
+    const note = await addNote(data, notesDispatch);
+    if (note) {
+      setSelectedNotes([...selectedNotes, note]);
+    }
+
+    return;
   };
 
   if (editMode) {

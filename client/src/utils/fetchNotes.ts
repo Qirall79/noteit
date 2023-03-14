@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fetchNotes = async (authorId: string, setNotes: any) => {
+const fetchNotes = async (authorId: string, notesDispatch: any) => {
   try {
     const url: string = "http://localhost:5000/notes/" + authorId;
     const response = await axios.get(url, {
@@ -8,7 +8,10 @@ const fetchNotes = async (authorId: string, setNotes: any) => {
         Authorization: localStorage.getItem("token") || "",
       },
     });
-    setNotes(response.data.notes);
+    notesDispatch({
+      type: "fetch",
+      notes: response.data.notes,
+    });
   } catch (err) {
     console.log(err);
   }
