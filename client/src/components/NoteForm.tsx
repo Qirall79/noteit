@@ -13,9 +13,9 @@ type FormData = {
 };
 
 interface Props {
-  project: any;
-  selectedNotes: any;
-  setSelectedNotes: any;
+  project?: any;
+  selectedNotes?: any;
+  setSelectedNotes?: any;
 }
 
 const NoteForm: React.FC<Props> = ({
@@ -54,7 +54,7 @@ const NoteForm: React.FC<Props> = ({
 
   if (editMode) {
     return (
-      <div className="w-[250px] min-h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
+      <div className="w-[250px] h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
         <form method="post" className="flex flex-col items-start gap-5">
           <div className="form-group w-full max-w-[500px] form-group flex flex-col gap-1">
             <label className="font-medium text-[#50B688]" htmlFor="title">
