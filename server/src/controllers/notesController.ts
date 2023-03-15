@@ -117,7 +117,7 @@ const note_update = [
         title,
       });
       res.status(200).json({
-        message: "note updated successfully.",
+        success: true,
       });
     } catch (err) {
       next(err);

@@ -95,6 +95,11 @@ const project_delete = async (
 ) => {
   try {
     const id = req.params.id;
+
+    // delete notes associated to project
+    await Note.deleteMany({ project: id });
+
+    // delete project
     await Project.findByIdAndDelete(id);
 
     res.status(200).json({
