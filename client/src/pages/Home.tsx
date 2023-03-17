@@ -8,6 +8,7 @@ import Notes from "../components/Notes";
 import { UserContext } from "../contexts/userContext";
 import { NotesContext, NotesDispatchContext } from "../contexts/notesContext";
 import notesReducer from "../reducers/notesReducer";
+import { MutatingDots } from "react-loader-spinner";
 
 interface IUser {
   id: string;
@@ -39,7 +40,21 @@ const Home: React.FC<any> = (): any => {
   }, []);
 
   if (!loaded) {
-    return <div className="w-full min-h-[94.4vh] bg-slate-200">Loading...</div>;
+    return (
+      <div className="w-full min-h-[94.4vh] bg-[#1b4332] flex items-center justify-center">
+        <MutatingDots
+          height="100"
+          width="100"
+          color="#4fa94d"
+          secondaryColor="#4fa94d"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   return (
