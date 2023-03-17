@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 interface IUser {
   _id: string;
@@ -8,7 +9,7 @@ interface IUser {
 
 const fetchUser = async (userDispatch: any, setLoaded: any) => {
   try {
-    const url = "http://localhost:5000/auth/user";
+    const url = apiUrl + "auth/user";
     const token = localStorage.getItem("token");
 
     // check if token exists

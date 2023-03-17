@@ -1,8 +1,9 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 const deleteNote: any = async (id: string, notesDispatch: any) => {
   try {
-    const url: string = "http://localhost:5000/notes/";
+    const url: string = apiUrl + "notes/";
     await axios.delete(url + id, {
       headers: {
         Authorization: localStorage.getItem("token") || "",

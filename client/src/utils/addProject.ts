@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 const addProject: any = async (
   data: FormData,
@@ -6,7 +7,7 @@ const addProject: any = async (
   projects: any
 ) => {
   try {
-    const url: string = "http://localhost:5000/projects/";
+    const url: string = apiUrl + "projects/";
     const response = await axios.post(url, data, {
       headers: {
         Authorization: localStorage.getItem("token") || "",

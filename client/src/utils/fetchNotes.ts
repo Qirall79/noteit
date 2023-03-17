@@ -1,8 +1,9 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 const fetchNotes = async (authorId: string, notesDispatch: any) => {
   try {
-    const url: string = "http://localhost:5000/notes/" + authorId;
+    const url: string = apiUrl + "notes/" + authorId;
     const response = await axios.get(url, {
       headers: {
         Authorization: localStorage.getItem("token") || "",

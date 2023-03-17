@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 type FormData = {
   text: string;
@@ -10,7 +11,7 @@ type FormData = {
 
 const updateNote: any = async (data: FormData, notesDispatch: any) => {
   try {
-    const url: string = "http://localhost:5000/notes/";
+    const url: string = apiUrl + "notes/";
     await axios.put(url + data._id, data, {
       headers: {
         Authorization: localStorage.getItem("token") || "",

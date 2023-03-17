@@ -19,12 +19,23 @@ const Sidebar: React.FC<Props> = ({
   const [showConfirm, setShowConfirm] = useState("");
 
   const handleClick = (e: any) => {
-    const element = e.target.dataset.id;
+    // extract the target
+    const target =
+      e.target.nodeName.toLowerCase() === "li"
+        ? e.target
+        : e.target.nodeName.toLowerCase() === "path"
+        ? e.target.parentElement.parentElement
+        : e.target.parentElement;
+
+    // get project id from target dataset
+    const element = target.dataset.id;
+
+    // change styling and show appropriate project
     const current = document.querySelector(".selected");
     current?.classList.remove("bg-[#2d6a4f]");
     current?.classList.remove("selected");
-    e.target.classList.add("bg-[#2d6a4f]");
-    e.target.classList.add("selected");
+    target.classList.add("bg-[#2d6a4f]");
+    target.classList.add("selected");
     setSelected(element);
   };
 

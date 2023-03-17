@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 interface IData {
   username: string;
@@ -8,7 +9,7 @@ interface IData {
 const loginUser = async (data: IData, setRedirect: any, getUser: any) => {
   try {
     // Send login data
-    const url = "http://localhost:5000/auth/login";
+    const url = apiUrl + "auth/login";
     const response = await axios.post(url, data);
 
     // store token

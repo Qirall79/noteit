@@ -1,4 +1,5 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 const deleteProject: any = async (
   id: string,
@@ -6,7 +7,7 @@ const deleteProject: any = async (
   projects: any
 ) => {
   try {
-    const url: string = "http://localhost:5000/projects/";
+    const url: string = apiUrl + "projects/";
     await axios.delete(url + id, {
       headers: {
         Authorization: localStorage.getItem("token") || "",

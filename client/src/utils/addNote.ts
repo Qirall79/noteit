@@ -1,8 +1,9 @@
 import axios from "axios";
+import { apiUrl } from "./apiUrl";
 
 const addNote: any = async (data: FormData, notesDispatch: any) => {
   try {
-    const url: string = "http://localhost:5000/notes/";
+    const url: string = apiUrl + "notes/";
     const response = await axios.post(url, data, {
       headers: {
         Authorization: localStorage.getItem("token") || "",
