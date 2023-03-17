@@ -46,7 +46,11 @@ const Home: React.FC<any> = (): any => {
     <div className="w-full min-h-[94.4vh] grid grid-cols-[1fr_5fr] bg-slate-200">
       <NotesContext.Provider value={notes}>
         <NotesDispatchContext.Provider value={notesDispatch}>
-          <Sidebar projects={projects} setSelected={setSelected} />
+          <Sidebar
+            projects={projects}
+            setProjects={setProjects}
+            setSelected={setSelected}
+          />
           <Notes project={selected} />
         </NotesDispatchContext.Provider>
       </NotesContext.Provider>

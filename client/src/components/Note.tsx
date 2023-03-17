@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
 import { NotesDispatchContext } from "../contexts/notesContext";
 import deleteNote from "../utils/deleteNote";
+import ConfirmationForm from "./ConfirmationForm";
 import NoteUpdateForm from "./NoteUpdateForm";
 
 interface Props {
@@ -24,6 +25,9 @@ const Note: React.FC<Props> = ({
   // edit mode
   const [editMode, setEditMode] = useState(false);
 
+  // control confirmation form
+  const [showConfirm, setShowConfirm] = useState(false);
+
   // delete event handler
   const handleDelete = async () => {
     const isDeleted = await deleteNote(note._id, notesDispatch);
@@ -45,6 +49,17 @@ const Note: React.FC<Props> = ({
     );
   }
 
+  if (showConfirm) {
+    return (
+      <div className="w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
+        <ConfirmationForm
+          setShowConfirm={setShowConfirm}
+          acceptFunction={handleDelete}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
       <div className="flex justify-between items-center mb-4 pb-2 border-b-[.2px] border-[#71bb9a8e] ">
@@ -57,7 +72,7 @@ const Note: React.FC<Props> = ({
             className="text-lg text-[#40916c] hover:text-[#1B4332] cursor-pointer transition-all"
           />
           <AiFillDelete
-            onClick={handleDelete}
+            onClick={() => setShowConfirm(true)}
             className="text-lg text-[#40916c] hover:text-[#1B4332] cursor-pointer transition-all"
           />
         </div>

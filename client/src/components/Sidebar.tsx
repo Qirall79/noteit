@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import ProjectForm from "./ProjectForm";
+import { AiFillDelete } from "react-icons/ai";
+import deleteProject from "../utils/deleteProject";
+import ConfirmationForm from "./ConfirmationForm";
 
 interface Props {
   projects: any;
   setSelected: any;
+  setProjects: any;
 }
 
-const Sidebar: React.FC<Props> = ({ projects, setSelected }): any => {
+const Sidebar: React.FC<Props> = ({
+  projects,
+  setSelected,
+  setProjects,
+}): any => {
+  // show confirmation form
+  const [showConfirm, setShowConfirm] = useState("");
+
   const handleClick = (e: any) => {
     const element = e.target.dataset.id;
     const current = document.querySelector(".selected");
@@ -14,6 +26,20 @@ const Sidebar: React.FC<Props> = ({ projects, setSelected }): any => {
     e.target.classList.add("bg-[#2d6a4f]");
     e.target.classList.add("selected");
     setSelected(element);
+  };
+
+  const handleDelete = async (e: any) => {
+    const target =
+      e.target.nodeName.toLowerCase() === "path"
+        ? e.target.parentElement
+        : e.target;
+
+    const id = target.getAttribute("id");
+    setShowConfirm(id);
+  };
+
+  const confirmDelete = async (id: string) => {
+    await deleteProject(id, setProjects, projects);
   };
 
   return (
@@ -29,16 +55,36 @@ const Sidebar: React.FC<Props> = ({ projects, setSelected }): any => {
         {projects.map((project: any) => {
           return (
             <li
-              className="cursor-pointer px-10 py-3 font-medium text-lg hover:bg-[#20533c] transition-all"
+              className={`group cursor-pointer flex items-center justify-between px-10 py-3 font-medium text-lg hover:bg-[#20533c] ${
+                showConfirm === project._id ? "bg-[#20533c]" : ""
+              } transition-all `}
               onClick={handleClick}
               key={project._id}
               data-id={project._id}
             >
-              {project.name}
+              {showConfirm === project._id ? (
+                <div className="w-full ">
+                  <ConfirmationForm
+                    showConfirm={showConfirm}
+                    acceptFunction={confirmDelete}
+                    setShowConfirm={setShowConfirm}
+                  />
+                </div>
+              ) : (
+                <>
+                  <p>{project.name}</p>
+                  <AiFillDelete
+                    onClick={handleDelete}
+                    id={project._id}
+                    className="hidden group-hover:inline-block"
+                  />
+                </>
+              )}
             </li>
           );
         })}
       </ul>
+      <ProjectForm projects={projects} setProjects={setProjects} />
     </div>
   );
 };
