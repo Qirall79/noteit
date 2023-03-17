@@ -19,9 +19,7 @@ const ProjectModel_1 = __importDefault(require("../models/ProjectModel"));
 const notes_get = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const author = req.params.authorId;
-        const notes = yield NoteModel_1.default.find({ author })
-            .populate("author")
-            .populate("project");
+        const notes = yield NoteModel_1.default.find({ author });
         res.status(200).json({
             notes,
         });
