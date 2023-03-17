@@ -18,7 +18,7 @@ const Notes: React.FC<Props> = ({ project }): any => {
       return;
     }
 
-    const selected = notes.filter((note: any) => note.project === project);
+    const selected = notes.filter((note: any) => note.project._id === project);
     setSelectedNotes(selected);
   };
 

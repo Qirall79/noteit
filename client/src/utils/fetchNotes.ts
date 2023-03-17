@@ -9,6 +9,7 @@ const fetchNotes = async (authorId: string, notesDispatch: any) => {
         Authorization: localStorage.getItem("token") || "",
       },
     });
+
     notesDispatch({
       type: "fetch",
       notes: response.data.notes,
