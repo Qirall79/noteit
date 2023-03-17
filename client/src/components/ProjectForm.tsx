@@ -47,7 +47,7 @@ const ProjectForm: React.FC<Props> = ({ projects, setProjects }) => {
 
   if (editMode) {
     return (
-      <div className="w-full h-[300px] mt-8 pt-8 px-7 rounded-md">
+      <div className="w-full h-[300px] mt-8 pt-8 px-2 md:px-7 rounded-md">
         <form method="post" className="flex flex-col items-start gap-5">
           <div className="form-group w-full max-w-[500px] form-group flex flex-col gap-1">
             <label className="font-bold text-md text-[#081C15]" htmlFor="name">
@@ -88,10 +88,10 @@ const ProjectForm: React.FC<Props> = ({ projects, setProjects }) => {
   return (
     <div
       onClick={() => setEditMode(true)}
-      className="cursor-pointer text-black mt-8 px-10 py-3 font-medium text-lg hover:bg-[#20533C] hover:text-white transition-all"
+      className="cursor-pointer text-black mt-8 px-5 md:px-10 py-3 font-medium text-lg hover:bg-[#20533C] hover:text-white transition-all"
     >
-      <p className="flex gap-5 items-center">
-        <IoAddCircleSharp className="text-3xl" /> Add project
+      <p className="flex gap-3 md:gap-5 text-sm md:text-md items-center">
+        <IoAddCircleSharp className="text-2xl md:text-3xl" /> Add project
       </p>
     </div>
   );

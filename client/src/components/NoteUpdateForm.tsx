@@ -50,7 +50,7 @@ const NoteUpdateForm: React.FC<Props> = ({ note, setEditMode, setNote }) => {
   } = useForm<FormData>();
 
   return (
-    <div className="w-[250px] h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
+    <div className="w-[220px] md:w-[250px] h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
       <form method="post" className="flex flex-col items-start gap-5">
         <div className="form-group w-full max-w-[500px] form-group flex flex-col gap-1">
           <label

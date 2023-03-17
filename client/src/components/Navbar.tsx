@@ -6,7 +6,7 @@ const Navbar: React.FC<any> = (): any => {
   const user = useContext(UserContext);
 
   return (
-    <div className="w-full bg-[#081c15] text-white px-20 py-3 flex justify-between items-center">
+    <div className="w-full bg-[#081c15] text-white px-10 md:px-20 py-3 flex justify-between items-center">
       <h1 className="text-2xl font-medium">Note it</h1>
       <ul className="flex gap-10 font-medium">
         <li>

@@ -58,7 +58,7 @@ const Sidebar: React.FC<Props> = ({
       <ul className=" flex flex-col gap-5">
         <li
           data-id="all"
-          className="cursor-pointer px-10 py-3 font-medium text-lg bg-[#2d6a4f] hover:bg-[#20533c] transition-all selected"
+          className="cursor-pointer px-5 md:px-10 py-3 font-medium text-md md:text-lg bg-[#2d6a4f] hover:bg-[#20533c] transition-all selected"
           onClick={handleClick}
         >
           All
@@ -66,7 +66,7 @@ const Sidebar: React.FC<Props> = ({
         {projects.map((project: any) => {
           return (
             <li
-              className={`group cursor-pointer flex items-center justify-between px-10 py-3 font-medium text-lg hover:bg-[#20533c] ${
+              className={`group cursor-pointer flex items-center justify-between px-5 md:px-10 py-3 font-medium text-md md:text-lg hover:bg-[#20533c] ${
                 showConfirm === project._id ? "bg-[#20533c]" : ""
               } transition-all `}
               onClick={handleClick}

@@ -51,7 +51,7 @@ const Note: React.FC<Props> = ({
 
   if (showConfirm) {
     return (
-      <div className="w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
+      <div className="w-[200px] md:w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
         <ConfirmationForm
           setShowConfirm={setShowConfirm}
           acceptFunction={handleDelete}
@@ -61,7 +61,7 @@ const Note: React.FC<Props> = ({
   }
 
   return (
-    <div className="w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
+    <div className="w-[220px] md:w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
       <div className="flex justify-between items-center mb-4 pb-2 border-b-[.2px] border-[#71bb9a8e] ">
         <h3 className="capitalize text-lg font-semibold text-[#50b688]">
           {currentNote.title ? currentNote.title : "title"}

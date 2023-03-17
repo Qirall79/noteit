@@ -54,7 +54,7 @@ const NoteForm: React.FC<Props> = ({
 
   if (editMode) {
     return (
-      <div className="w-[250px] h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
+      <div className="w-[220px] md:w-[250px] h-[300px] bg-[#081c15] pt-8 px-7 rounded-md">
         <form method="post" className="flex flex-col items-start gap-5">
           <div className="form-group w-full max-w-[500px] form-group flex flex-col gap-1">
             <label className="font-medium text-[#50B688]" htmlFor="title">
@@ -108,7 +108,7 @@ const NoteForm: React.FC<Props> = ({
     );
   }
   return (
-    <div className="w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
+    <div className="w-[220px] md:w-[250px] h-[300px] bg-[#081c15] py-5 px-7 rounded-md">
       <IoMdAddCircleOutline
         onClick={() => setEditMode(true)}
         className="w-full h-full text-[#40916C] hover:text-[#1B4332] cursor-pointer transition-all"
