@@ -45,7 +45,7 @@ const NoteForm: React.FC<Props> = ({
 
     // update UI
     const note = await addNote(data, notesDispatch);
-    if (note) {
+    if (note._id) {
       setSelectedNotes([...selectedNotes, note]);
     }
 

@@ -18,7 +18,7 @@ interface IUser {
 
 const Home: React.FC<any> = (): any => {
   // get user from context
-  const user = useContext(UserContext);
+  const user: IUser = useContext(UserContext);
 
   // Reducers
   const [notes, notesDispatch] = useReducer(notesReducer, []);
