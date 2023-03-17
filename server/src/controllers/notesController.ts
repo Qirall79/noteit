@@ -20,9 +20,7 @@ const notes_get = async (
 ): Promise<void> => {
   try {
     const author = req.params.authorId;
-    const notes: INote[] = await Note.find({ author })
-      .populate("author")
-      .populate("project");
+    const notes: INote[] = await Note.find({ author });
 
     res.status(200).json({
       notes,
