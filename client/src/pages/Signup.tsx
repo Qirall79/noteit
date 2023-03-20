@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import signupUser from "../utils/signupUser";
 import { useForm } from "react-hook-form";
+import { MutatingDots } from "react-loader-spinner";
 
 interface Props {
   getUser: any;
@@ -16,6 +17,7 @@ type FormData = {
 
 const Signup: React.FC<Props> = ({ getUser }): any => {
   const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState({ message: "" });
   const [confirmation, setConfirmation] = useState("");
   const {
@@ -25,18 +27,37 @@ const Signup: React.FC<Props> = ({ getUser }): any => {
   } = useForm<FormData>();
 
   const handleClick = async (data: any) => {
-    console.log(data);
     if (data.password !== data.password_confirmation) {
       setConfirmation("Passwords don't match");
       return;
     }
+    setLoading(true);
     setConfirmation("");
 
     await signupUser(data, setRedirect, getUser, setResponse);
+    setLoading(false);
   };
 
   if (redirect) {
     return <Navigate to={"/"} />;
+  }
+
+  if (loading) {
+    return (
+      <div className="w-full min-h-[94.4vh] bg-[#1b4332] flex items-center justify-center">
+        <MutatingDots
+          height="100"
+          width="100"
+          color="#4fa94d"
+          secondaryColor="#4fa94d"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   return (
