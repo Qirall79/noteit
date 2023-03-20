@@ -56,7 +56,7 @@ const Sidebar: React.FC<Props> = ({
   const confirmDelete = async (id: string) => {
     deleteProject(id, setProjects, projects).then(() => {
       notesDispatch({
-        action: "delete project",
+        type: "delete project",
         project: id,
       });
     });

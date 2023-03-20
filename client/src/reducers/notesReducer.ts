@@ -9,8 +9,7 @@ const notesReducer = (notes: any, action: any) => {
     case "update":
       notes = notes.filter((note: any) => note._id !== action.id);
       return [...notes, action.note];
-    case "remove project":
-      console.log(notes);
+    case "delete project":
       notes = notes.filter((note: any) => note.project !== action.project);
       return [...notes];
     default:
