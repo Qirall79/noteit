@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ProjectForm from "./ProjectForm";
 import { AiFillDelete } from "react-icons/ai";
 import deleteProject from "../utils/deleteProject";
 import ConfirmationForm from "./ConfirmationForm";
+import { NotesDispatchContext } from "../contexts/notesContext";
 
 interface Props {
   projects: any;
@@ -15,6 +16,9 @@ const Sidebar: React.FC<Props> = ({
   setSelected,
   setProjects,
 }): any => {
+  // notes dispatch function context
+  const notesDispatch = useContext(NotesDispatchContext);
+
   // show confirmation form
   const [showConfirm, setShowConfirm] = useState("");
 
@@ -50,7 +54,12 @@ const Sidebar: React.FC<Props> = ({
   };
 
   const confirmDelete = async (id: string) => {
-    await deleteProject(id, setProjects, projects);
+    deleteProject(id, setProjects, projects).then(() => {
+      notesDispatch({
+        action: "delete project",
+        project: id,
+      });
+    });
   };
 
   return (
