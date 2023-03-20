@@ -34,6 +34,7 @@ const NoteForm: React.FC<Props> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -48,7 +49,7 @@ const NoteForm: React.FC<Props> = ({
     if (note._id) {
       setSelectedNotes([...selectedNotes, note]);
     }
-
+    reset({ text: "", title: "" });
     return;
   };
 

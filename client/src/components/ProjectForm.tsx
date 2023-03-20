@@ -24,6 +24,7 @@ const ProjectForm: React.FC<Props> = ({ projects, setProjects }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -43,6 +44,7 @@ const ProjectForm: React.FC<Props> = ({ projects, setProjects }) => {
 
     await addProject(data, setProjects, projects);
     setEditMode(false);
+    reset({ name: "" });
   };
 
   if (editMode) {
