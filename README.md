@@ -8,7 +8,7 @@ You can create, delete and edit your notes. Notes must be associated to a projec
 
 ## Demo
 
-You can check the live demo here: [Live]([https://6418a97247cad900089eab4b--symphonious-cascaron-d31a5b.netlify.app/](https://symphonious-cascaron-d31a5b.netlify.app/))
+You can check the live demo here: [Live](https://symphonious-cascaron-d31a5b.netlify.app/)
 
 
 ## Technologies Used
